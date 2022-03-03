@@ -1,6 +1,30 @@
 # (SOSLAB) ML LiDAR SDK
 ---
 
+## Release v1.1.0 (2022-03-04, SML) 
+
+### F/W (v1.2.0)
+- Walk-error Correction
+- F/W Update Function
+<br/>
+
+### API/Manager (v1.7.3)
+- F/W Update Function
+- Preset Read/Write 
+- Enhanced Zigzag-filling
+- Real Ambient Estimation
+- Data Recording/Play
+- Point-cloud Color Map
+<br/>
+
+### User Guide (v1.1.0)
+- F/W Update Example
+- Multi-LiDAR Example
+- Data Record/Play Example
+<br/>
+<br/>
+<br/>
+
 ## Release v1.0.0 (2021-09-27)
 
 ### F/W (v1.0.0)
