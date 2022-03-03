@@ -1,11 +1,12 @@
 # (SOSLAB) ML LiDAR SDK
 ---
 
-## Release v1.1.0 (2022-03-04, SML) 
+## Release v1.1.0 (2022-03-04, CML) 
 
-### F/W (v1.2.0)
-- Walk-error Correction
+### F/W (v1.6.0)
+- Enhanced Walk-error Correction
 - F/W Update Function
+- Enhanced VCSEL Control Logic
 <br/>
 
 ### API/Manager (v1.7.3)
