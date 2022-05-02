@@ -1,5 +1,0 @@
-#[Application]
-mode=type:string,{"_normal_mode_"}
-
-
-## The end of "config"

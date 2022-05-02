@@ -1,6 +1,27 @@
 # (SOSLAB) ML LiDAR SDK
 ---
 
+## Release v1.2.0 (2022-05-02, TML) 
+
+### F/W (v1.10.1)
+- Timing Sync. In/Out Mode: Master, Slave, Capture
+- VCSEL Control Logic (1 Group)
+- Device IP Search Function
+- ML-1.5 Control Logic 
+<br/>
+
+### API/Manager (v1.12.0)
+- Timing Sync. In/Out Mode & Example 
+- ML Python API & Example
+- Data Processing for ML-1.5 
+<br/>
+
+### User Guide (v1.2.0)
+- Manual for ML Manager Renewal
+<br/>
+<br/>
+<br/>
+
 ## Release v1.1.0 (2022-03-04, CML) 
 
 ### F/W (v1.6.0)

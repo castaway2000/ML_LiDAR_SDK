@@ -50,8 +50,8 @@ CXXFLAGS    += -DASIO_STANDALONE
 LIBS        += -lsoslab_ml
 
 # opencv    
-LIBS += $(shell pkg-config --libs opencv)
-INCS += $(shell pkg-config --cflags opencv)
+LIBS += $(shell pkg-config --libs opencv4)
+INCS += $(shell pkg-config --cflags opencv4)
 
 #	set LDFLAGS and CFLAGS(CXXFLAGS)
 LDFLAGS  = $(LIBS) -O2 #-fopenmp #-pg
