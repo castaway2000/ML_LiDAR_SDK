@@ -12,7 +12,6 @@
 
 ### API/Manager (v1.12.0)
 - Timing Sync. In/Out Mode & Example 
-- ML Python API & Example
 - Data Processing for ML-1.5 
 <br/>
 
