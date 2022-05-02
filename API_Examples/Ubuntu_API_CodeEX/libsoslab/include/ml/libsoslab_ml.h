@@ -65,6 +65,9 @@
     #define TCP_PROT_DEVICE_SUB_CMD_STOP                        ('S')
     #define TCP_PROT_DEVICE_SUB_CMD_SUCCESS                     ('O')
     #define TCP_PROT_DEVICE_SUB_CMD_FAIL                        ('X')
+
+#define TCP_PROT_MAIN_CMD_TRIG                                  ('T')
+	#define TCP_PROT_TRIG_SUB_CMD_CAPTURE                       ('C')
     
 #define HEADER					"SLAB"
 
@@ -114,6 +117,9 @@
 #define	SET_INTS_FIR_COE		0x0289	// 0x0289 ~ 0x0293
 #define	SET_OUTPUT_SYNC_POL		0x0294
 #define	SET_RX_HV_CTRL_EN		0x0295
+#define	SET_INPUT_SYNC_POL		0x0296
+#define	SET_SYNC_MODE			0x0297
+#define	SET_FPS					0x0298
 
 namespace SOSLAB
 {
@@ -228,6 +234,11 @@ namespace SOSLAB
 			uint32_t output_sync_polarity;
 			uint32_t rx_hv_ctrl_en;
 
+			uint32_t input_sync_polarity;
+			uint32_t sync_signal_mode;
+
+			uint32_t fps;
+
 		} configurations_t;
 
 		typedef struct SOSLAB_EXPORTS _ML1_SCENE_T {
@@ -304,7 +315,7 @@ namespace SOSLAB
 			float xadc_vccpint;
 			float xadc_vccpaux;
 			float xadc_vcco_ddr;
-#if 1
+
 			float xadc_rd_ddr_vtt;
 			float xadc_rd_dp3v3;
 			float xadc_rd_p12v;
@@ -323,38 +334,6 @@ namespace SOSLAB
 			float xadc_rx_vdp;
 			float xadc_rx_vdn;
 			float xadc_rx_0v5;
-#else
-			float xadc_tx_0v5;
-			float xadc_tx_5v0;
-			float xadc_tx_12v;
-			float xadc_tx_hv;
-			float xadc_tx_temp;
-
-			float xadc_rx_hv;
-			float xadc_rx_vcore;
-			float xadc_rx_vio;
-			float xadc_rx_vdp;
-			float xadc_rx_vdn;
-
-			float xadc_pw_tx_vin;
-			float xadc_pw_rx_vin;
-			float xadc_pw_tx_5v0;
-			float xadc_pw_tx_hv;
-			float xadc_pw_rx_vcore;
-			float xadc_pw_rx_vio;
-			float xadc_pw_rx_hv;
-
-			float xadc_bp_ign;
-			float xadc_bp_vin;
-			float xadc_bp_p12v;
-			float xadc_bp_heat_pwr;
-			float xadc_bp_d3v3;
-			float xadc_bp_d1v8;
-
-			float xadc_rd_dp3v3;
-
-			float xadc_rd_ddr_vtt;
-#endif
 
 			float rx_temp;
 		} sensing_packet_t;
@@ -386,6 +365,7 @@ namespace SOSLAB
 		bool tcp_system_mode_read();
 		
 		bool tcp_register_write(const char* name);
+		bool tcp_register_read();
 		bool tcp_register_read(const char* name);
 		bool tcp_memory_upload();
 		bool tcp_memory_download();
@@ -395,6 +375,7 @@ namespace SOSLAB
 		bool tcp_production_mode_command(const char* cmd, uint16_t len);
 		bool tcp_device_run();
 		bool tcp_device_stop();
+		bool tcp_trigger_capture();
 		
 		bool tcp_get_message(tcp_protocol_t& buffer);
 

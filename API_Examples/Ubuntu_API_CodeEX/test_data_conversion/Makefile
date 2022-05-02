@@ -5,14 +5,8 @@
 .SUFFIXES : .c .cpp .o 
 
 # 	GNU C++ compiler
-## Raspberry-pi
-#CC = arm-linux-gnueabihf-gcc 
-#CXX = arm-linux-gnueabihf-g++ 
-#AR = arm-linux-gnueabihf-ar
-
-## native
-CC = gcc-7
-CXX = g++-7
+CC = gcc
+CXX = g++
 AR = ar
 
 ## current foldername is target name
@@ -26,7 +20,7 @@ BUILD_PATH 	= ../libsoslab
 BIN_PATH 	= $(BUILD_PATH)/bin
 OBJ_PATH 	= $(BUILD_PATH)/obj
 
-SRC_PATH 	= ../example_src/ml
+SRC_PATH 	= ../example_src/data_conversion
 
 C_SRCS		= $(wildcard $(SRC_PATH)/*.c)
 CXX_SRCS	= $(wildcard $(SRC_PATH)/*.cpp)
@@ -44,17 +38,13 @@ LIBS        += -L$(BUILD_PATH)/bin
 # libsoslab_core options	
 LIBS        += -lsoslab_core
 LIBS        += -pthread
-CXXFLAGS    += -DASIO_STANDALONE
+CXXFLAGS    += -DASIO_STANDALONE 
 
 # libsoslab_ml options
 LIBS        += -lsoslab_ml
 
-# opencv    
-LIBS += $(shell pkg-config --libs opencv4)
-INCS += $(shell pkg-config --cflags opencv4)
-
 #	set LDFLAGS and CFLAGS(CXXFLAGS)
-LDFLAGS  = $(LIBS) -O2 #-fopenmp #-pg
+LDFLAGS  = $(LIBS) -O2 #-pg
 
 CFLAGS = $(INCS) -c -std=c99 -fPIC 
 

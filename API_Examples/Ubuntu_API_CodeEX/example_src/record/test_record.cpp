@@ -14,10 +14,10 @@
 int main()
 {
 	bool success;
-	/* LidarML °´Ã¼¸¦ »ý¼ºÇÕ´Ï´Ù. */
+	/* LidarML ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. */
 	std::shared_ptr<SOSLAB::LidarMl> lidar_ml(new SOSLAB::LidarMl);	
 	
-	/* ¿¬°á Á¤º¸¸¦ È°¿ëÇÏ¿© ÀåÄ¡¿¡ ¿¬°áÇÕ´Ï´Ù. */
+	/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. */
  	SOSLAB::ip_settings_t ip_settings_device;
 	SOSLAB::ip_settings_t ip_settings_pc;
 	ip_settings_pc.ip_address = "0.0.0.0"; 
@@ -30,7 +30,7 @@ int main()
 		return 0;
 	}
 
-	/* µ¥ÀÌÅÍ ½ºÆ®¸®¹ÖÀ» ½ÃÀÛ ÇÕ´Ï´Ù. */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½. */
 	success = lidar_ml->tcp_device_run();
 	if (!success) {
 		std::cerr << "LiDAR ML :: start failed." << std::endl;
@@ -38,27 +38,27 @@ int main()
 	}
 	std::cout << "LiDAR ML :: Streaming started!" << std::endl;
 
-	std::string save_directory = "./log/";
+	std::string save_directory = "../";
 
-#ifdef _WIN32
-	if (_access(save_directory.c_str(), 0)) {
-		if (_mkdir(save_directory.c_str())) return false;
-	}
-#endif // _WIN32
-#ifdef __linux__
-	mkdir(save_directory.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#endif
-	bool retval = lidar_ml->start_recording(save_directory);
+// #ifdef _WIN32
+// 	if (_access(save_directory.c_str(), 0)) {
+// 		if (_mkdir(save_directory.c_str())) return false;
+// 	}
+// #endif // _WIN32
+// #ifdef __linux__
+// 	mkdir(save_directory.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+// #endif
+	bool retval = lidar_ml->start_recording(save_directory + "record");
 
 	int frame_number = 0;
 	int logging_data_size = 10;
 	std::string filename;
 	while (frame_number < logging_data_size) {
 		SOSLAB::LidarMl::scene_t scene;
-		/* Stream FIFO·ÎºÎÅÍ ÇÑ ÇÁ·¹ÀÓ¾¿ Lidar data¸¦ °¡Á®¿É´Ï´Ù. */
+		/* Stream FIFOï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½ Lidar dataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½. */
 		if (lidar_ml->get_scene(scene)) {
-			std::size_t height = scene.rows;	// Lidar frameÀÇ height Á¤º¸ÀÔ´Ï´Ù.
-			std::size_t width = scene.cols;		// Lidar frameÀÇ width Á¤º¸ÀÔ´Ï´Ù.
+			std::size_t height = scene.rows;	// Lidar frameï¿½ï¿½ height ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+			std::size_t width = scene.cols;		// Lidar frameï¿½ï¿½ width ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 
 			frame_number++;
 			std::cout << frame_number << std::endl;
@@ -66,19 +66,12 @@ int main()
 	}
 	lidar_ml->stop_recording();
 	
-	/* ½ºÆ®¸®¹ÖÀ» Á¾·á ÇÕ´Ï´Ù. */
+	/* ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½. */
 	lidar_ml->tcp_device_stop();
-
-	/* Recording FileÀ» Point Cloud·Î º¯È¯ÇÕ´Ï´Ù.
-	   [FILE_PATH]      = recording file name			 (ex. 02-15-23-48-08.bin)
-	   [SAVE_DIRECTORY] = save direcotry for point cloud (ex. "./")
-	*/
-	//lidar_ml->connect_file([FILE_PATH]);
-	//lidar_ml->binary2file([SAVE_DIRECTORY]);
 
 	std::cout << "Streaming stopped!" << std::endl;
 
-	/* ÀåÄ¡ ¿¬°áÀ» ÇØÁ¦ÇÕ´Ï´Ù. */
+	/* ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. */
 	lidar_ml->disconnect();
 
 	std::cout << "Done." << std::endl;
